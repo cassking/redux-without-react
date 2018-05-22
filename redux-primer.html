@@ -1,0 +1,60 @@
+<!DOCTYPE  html>
+<html>
+<head>
+<title>colors</title>
+<script src="https://unpkg.com/redux@latest/dist/redux.js"></script>
+</head>
+<body>
+  <script>
+  //ACTION CREATORS
+  function addColor(value) {
+    return {
+      type: "ADD",
+      color:value
+    }
+  }
+  function removeColor(value) {
+    return {
+      type: "REMOVE",
+      color:value
+    }
+  }
+//simple reducer function
+  function favoriteColor(state,action){
+    if(state===undefined){
+      state=[]//empty array obj
+    }
+
+    if (action.type==="ADD"){
+      return state.concat(action.color)
+    } else if (action.type==="REMOVE"){
+      return state.filter(function(item){
+        return item !== action.color
+      })
+    } else {
+      return state
+    }
+  }
+
+  //store piece with reducer as argument
+  let store = Redux.createStore(favoriteColor)
+  //dispatch method on our store object and specifying an ACTION
+console.log('the store', store)
+
+// then in console
+// store.dispatch(addColor("blue"))
+// {type: "ADD", color: "blue"}
+// store.dispatch(addColor("yellow"))
+// {type: "ADD", color: "yellow"}
+// store.dispatch(addColor("green"))
+// {type: "ADD", color: "green"}
+// store.dispatch(addColor("blue"))
+// {type: "ADD", color: "blue"}
+// store.dispatch(addColor("yellow"))
+// {type: "ADD", color: "yellow"}
+// store.dispatch(addColor("green"))
+// {type: "ADD", color: "green"}
+
+  </script>
+</body>
+</html>
